@@ -70,6 +70,43 @@ function showProfile() {
     </div>
   `;
 }
+function playAudio(text){
+  const synth = window.speechSynthesis;
+
+  if(synth.speaking) synth.cancel();
+
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "en-US";
+  utter.rate = 0.9;
+
+  // MOBILE FIX
+  synth.resume();
+  synth.speak(utter);
+}
 
 /* INIT */
 checkUser();
+function playAudio(text){
+  const synth = window.speechSynthesis;
+
+  synth.cancel();
+
+  const speak = () => {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "en-US";
+    utter.rate = 0.9;
+    synth.speak(utter);
+  };
+
+  // 🔴 MUHIM FIX (Netlify + mobile)
+  if (synth.getVoices().length === 0) {
+    synth.onvoiceschanged = () => {
+      synth.resume();
+      speak();
+    };
+  } else {
+    synth.resume();
+    speak();
+  }
+}
+
