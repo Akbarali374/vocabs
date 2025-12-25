@@ -70,10 +70,10 @@ function showProfile() {
     </div>
   `;
 }
-function playAudio(text){
+function playAudio(text) {
   const synth = window.speechSynthesis;
 
-  if(synth.speaking) synth.cancel();
+  if (synth.speaking) synth.cancel();
 
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = "en-US";
@@ -86,7 +86,7 @@ function playAudio(text){
 
 /* INIT */
 checkUser();
-function playAudio(text){
+function playAudio(text) {
   const synth = window.speechSynthesis;
 
   synth.cancel();
@@ -110,3 +110,6 @@ function playAudio(text){
   }
 }
 
+function openInBrowser() {
+  window.open(window.location.href, "_blank");
+}

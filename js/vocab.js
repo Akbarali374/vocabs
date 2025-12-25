@@ -213,3 +213,10 @@ function clearWords() {
     showVocabulary();
   }
 }
+const isTelegram = /Telegram/i.test(navigator.userAgent);
+
+if (isTelegram) {
+  alert(
+    "🔊 Voice does NOT work in Telegram.\nPlease open in Chrome or Safari."
+  );
+}
