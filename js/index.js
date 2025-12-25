@@ -113,3 +113,38 @@ function playAudio(text) {
 function openInBrowser() {
   window.open(window.location.href, "_blank");
 }
+function isTelegram() {
+  return /Telegram/i.test(navigator.userAgent);
+}
+function playAudio(text){
+  if (isTelegram()) {
+    showTelegramHelp();
+    return;
+  }
+
+  const synth = window.speechSynthesis;
+  synth.cancel();
+
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "en-US";
+  utter.rate = 0.9;
+
+  synth.resume();
+  synth.speak(utter);
+}
+function showTelegramHelp(){
+  alert(
+`🔊 Voice does NOT work inside Telegram.
+
+❌ Reason:
+Telegram blocks voice features.
+
+✅ Solution:
+1) Copy this site link
+2) Open Google Chrome or Safari
+3) Paste the link and open
+4) Voice will work perfectly
+
+👉 Please open this site in browser for voice feature.`
+  );
+}
